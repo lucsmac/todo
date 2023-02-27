@@ -2,39 +2,15 @@ import { useState } from 'react';
 import styles from './styles.module.css';
 import emptyTasksIcon from './../../assets/empty.svg';
 import trashIcon from './../../assets/trash.svg';
+import { Task } from '../tasks';
 
-interface Task {
-  id: number;
-  label: string;
-  done: boolean;
+interface TasksListProps {
+  tasks: Task[];
 }
 
-export function TasksList() {
-  const [tasks, setTasks] = useState<Task[]>([
-    {
-      id: 1,
-      label: 'Tarefa 1',
-      done: false,
-    },
-    {
-      id: 2,
-      label: 'Tarefa 2',
-      done: true,
-    },
-    {
-      id: 3,
-      label: 'Tarefa 3',
-      done: false,
-    },
-    {
-      id: 4,
-      label: 'Tarefa 4',
-      done: false,
-    },
-  ])
-
+export function TasksList({ tasks }: TasksListProps) {
+  console.log('tasks: ', tasks)
   const completedTasks = tasks.reduce((total, task) => task.done ? total + 1 : total, 0)
-  const orderedTasks = tasks.sort((a, b) => Number(a.done) - Number(b.done));
 
   function handleCompleteTask(id: number) {
     const selectedTask = tasks.find(task => task.id === id)
@@ -67,7 +43,7 @@ export function TasksList() {
       {tasks.length > 0 ?
         (
           <ul className={styles.tasksList}>
-            {orderedTasks.map(task => (
+            {tasks.map(task => (
               <li
                 key={task.id}
                 className={`${styles.task}${task.done ? ' ' + styles.taskDone : ''}`}

@@ -1,15 +1,29 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
+import { Task } from '../tasks';
 import styles from './styles.module.css';
 
-export function TaskRegister() {
-  const [task, setTask] = useState('');
+interface TaskRegisterProps {
+  addTask: (task: Task) => void;
+}
+
+export function TaskRegister({ addTask }: TaskRegisterProps) {
+  const [taskLabel, setTaskLabel] = useState('');
 
   function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
-    setTask(event.target.value)
+    setTaskLabel(event.target.value);
   }
 
   function handleCreateTask(event: FormEvent<HTMLFormElement>) {
-    console.log(event.target)
+    event.preventDefault();
+
+    const task: Task = {
+      id: Math.random(),
+      label: taskLabel,
+      done: false
+    }
+
+    addTask(task);
+    setTaskLabel('');
   }
 
   return (
@@ -17,8 +31,9 @@ export function TaskRegister() {
       <input
         className={styles.field}
         name="taskname"
-        value={task}
+        value={taskLabel}
         type="text"
+        required
         placeholder="Adicione uma nova tarefa"
         onChange={handleInputChange}
       />
