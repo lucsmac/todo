@@ -1,10 +1,19 @@
-import todoImage from './assets/todo-logo.svg';
+import { Header } from './components/header';
+import { TaskRegister } from './components/task-register';
+import { TasksList } from './components/tasks-list';
+import './global.css';
+import styles from './App.module.css';
 
 function App() {
   return (
-    <div className="App">
-      <img src={todoImage} alt="todo logotype" />
-    </div>
+    <>
+      <Header />
+
+      <main className={styles.tasks}>
+        <TaskRegister />
+        <TasksList />
+      </main>
+    </>
   )
 }
 
