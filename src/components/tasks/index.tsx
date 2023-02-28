@@ -16,6 +16,11 @@ export function Tasks() {
     setTasks([...tasks, task])
   }
 
+  function deleteTask(taskId: number) {
+    const tasksWhithoutDeletedOne = tasks.filter(task => task.id !== taskId);
+    setTasks(tasksWhithoutDeletedOne)
+  }
+
   const orderedTasks = tasks.sort((a, b) => Number(a.done) - Number(b.done));
 
   return (
@@ -25,6 +30,7 @@ export function Tasks() {
       />
       <TasksList
         tasks={orderedTasks}
+        deleteTask={deleteTask}
       />
     </main>
   )

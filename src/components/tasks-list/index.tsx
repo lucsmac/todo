@@ -6,9 +6,10 @@ import { Task } from '../tasks';
 
 interface TasksListProps {
   tasks: Task[];
+  deleteTask: (taskId: number) => void;
 }
 
-export function TasksList({ tasks }: TasksListProps) {
+export function TasksList({ tasks, deleteTask }: TasksListProps) {
   console.log('tasks: ', tasks)
   const completedTasks = tasks.reduce((total, task) => task.done ? total + 1 : total, 0)
 
@@ -53,7 +54,12 @@ export function TasksList({ tasks }: TasksListProps) {
                   {task.done ? '✔' : ''}
                 </span>
                 <p className={styles.taskLabel}>{task.label}</p>
-                <img className={styles.taskDelete} src={trashIcon} alt="Trash icon" />
+                <img
+                  className={styles.taskDelete}
+                  src={trashIcon}
+                  alt="Trash icon"
+                  onClick={() => deleteTask(task.id)}
+                />
               </li>
             ))}
           </ul>

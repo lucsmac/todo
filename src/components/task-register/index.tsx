@@ -17,7 +17,7 @@ export function TaskRegister({ addTask }: TaskRegisterProps) {
     event.preventDefault();
 
     const task: Task = {
-      id: Math.random(),
+      id: Math.round(Math.random() * 999999),
       label: taskLabel,
       done: false
     }
