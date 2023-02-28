@@ -13,7 +13,7 @@ export function Tasks() {
   const [tasks, setTasks] = useState<Task[]>([])
 
   function addTask(task: Task) {
-    setTasks([...tasks, task])
+    setTasks([task, ...tasks])
   }
 
   function deleteTask(taskId: number) {
@@ -21,16 +21,25 @@ export function Tasks() {
     setTasks(tasksWhithoutDeletedOne)
   }
 
+  function toggleTask(taskId: number) {
+    const updatedTasks = tasks.map(task => {
+      if (task.id === taskId) task.done = !task.done
+      return task
+    });
+    setTasks(updatedTasks)
+  }
+
   const orderedTasks = tasks.sort((a, b) => Number(a.done) - Number(b.done));
 
   return (
     <main className={styles.tasks}>
       <TaskRegister
-        addTask={addTask}
+        handleAddTask={addTask}
       />
       <TasksList
         tasks={orderedTasks}
-        deleteTask={deleteTask}
+        handleDeleteTask={deleteTask}
+        handleToggleTask={toggleTask}
       />
     </main>
   )

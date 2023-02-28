@@ -3,10 +3,10 @@ import { Task } from '../tasks';
 import styles from './styles.module.css';
 
 interface TaskRegisterProps {
-  addTask: (task: Task) => void;
+  handleAddTask: (task: Task) => void;
 }
 
-export function TaskRegister({ addTask }: TaskRegisterProps) {
+export function TaskRegister({ handleAddTask }: TaskRegisterProps) {
   const [taskLabel, setTaskLabel] = useState('');
 
   function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
@@ -22,7 +22,7 @@ export function TaskRegister({ addTask }: TaskRegisterProps) {
       done: false
     }
 
-    addTask(task);
+    handleAddTask(task);
     setTaskLabel('');
   }
 

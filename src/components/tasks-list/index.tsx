@@ -6,18 +6,12 @@ import { Task } from '../tasks';
 
 interface TasksListProps {
   tasks: Task[];
-  deleteTask: (taskId: number) => void;
+  handleDeleteTask: (taskId: number) => void;
+  handleToggleTask: (taskId: number) => void;
 }
 
-export function TasksList({ tasks, deleteTask }: TasksListProps) {
-  console.log('tasks: ', tasks)
+export function TasksList({ tasks, handleDeleteTask, handleToggleTask }: TasksListProps) {
   const completedTasks = tasks.reduce((total, task) => task.done ? total + 1 : total, 0)
-
-  function handleCompleteTask(id: number) {
-    const selectedTask = tasks.find(task => task.id === id)
-
-    console.log(selectedTask);
-  }
 
   return (
     <div className={styles.tasks}>
@@ -48,9 +42,11 @@ export function TasksList({ tasks, deleteTask }: TasksListProps) {
               <li
                 key={task.id}
                 className={`${styles.task}${task.done ? ' ' + styles.taskDone : ''}`}
-                onClick={() => handleCompleteTask(task.id)}
               >
-                <span className={styles.taskCheck}>
+                <span
+                  className={styles.taskCheck}
+                  onClick={() => handleToggleTask(task.id)}
+                >
                   {task.done ? '✔' : ''}
                 </span>
                 <p className={styles.taskLabel}>{task.label}</p>
@@ -58,7 +54,7 @@ export function TasksList({ tasks, deleteTask }: TasksListProps) {
                   className={styles.taskDelete}
                   src={trashIcon}
                   alt="Trash icon"
-                  onClick={() => deleteTask(task.id)}
+                  onClick={() => handleDeleteTask(task.id)}
                 />
               </li>
             ))}
