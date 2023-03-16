@@ -14,3 +14,5 @@ Apesar de serem poucas funcionalidades, você vai precisar relembrar conceitos c
 - Listas e chaves no ReactJS
 - Propriedades
 - Componentização
+
+Teste de push com o bot [1]
