@@ -15,4 +15,4 @@ Apesar de serem poucas funcionalidades, você vai precisar relembrar conceitos c
 - Propriedades
 - Componentização
 
-Teste de push com o bot [2]
+Teste de push com o bot [3]
